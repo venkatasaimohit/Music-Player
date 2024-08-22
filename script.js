@@ -12,11 +12,11 @@ function convertSeconds(seconds) {
     .padStart(2, "0")}`;
   return formattedTime;
 }
-
+//https://vaibhavrajharsh.github.io/Music-Player/musics/MyFavourates/Afsane.mp3
 async function getSongs(folder) {
   Songs = []; // Clear the Songs array to avoid duplication
-  currFolder = Music-Player/folder;
-  let a = await fetch(`https://vaibhavrajharsh.github.io/${Music-Player/folder}/`);
+  currFolder = folder;
+  let a = await fetch(`https://vaibhavrajharsh.github.io/Music-Player/${folder}/`);
   let response = await a.text();
   let div = document.createElement("div");
   div.innerHTML = response;
