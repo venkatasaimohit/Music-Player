@@ -15,8 +15,8 @@ function convertSeconds(seconds) {
 
 async function getSongs(folder) {
   Songs = []; // Clear the Songs array to avoid duplication
-  currFolder = folder;
-  let a = await fetch(`https://vaibhavrajharsh.github.io/Music-Player/${folder}/`);
+  currFolder = Music-Player/folder;
+  let a = await fetch(`https://vaibhavrajharsh.github.io/${Music-Player/folder}/`);
   let response = await a.text();
   let div = document.createElement("div");
   div.innerHTML = response;
