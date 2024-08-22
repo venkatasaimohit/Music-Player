@@ -24,7 +24,7 @@ async function getSongs(folder) {
   for (let i = 0; i < list.length; i++) {
     const element = list[i];
     if (element.href.endsWith(".mp3")) {
-      Songs.push(element.href.split(`/${currFolder}/`)[1]);
+      Songs.push(element.href.split(`/${Music-Player}/`)[1]);
     }
   }
   let SongDiv = document.querySelector(".lists ul");
