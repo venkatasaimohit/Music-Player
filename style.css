@@ -443,12 +443,9 @@ input{
   }
 }
 
-@media(max-width: 927px){
-
+@media(max-width: 780px){
+    
 }
-
-
-
 
 /* Style the scrollbar track */
 ::-webkit-scrollbar-track {
