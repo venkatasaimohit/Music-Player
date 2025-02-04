@@ -78,7 +78,7 @@ Push to the branch:
 ````
 git push origin feature-name
 ````
-Open a pull request.
+Open a pull request..
 
 📄 License<br>
 - This project is licensed under the MIT License.
