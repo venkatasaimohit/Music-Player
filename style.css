@@ -15,6 +15,15 @@
             overflow: hidden;
         }
 
+        body.bright-mode {
+            background-color: white;
+            color: black;
+        }
+
+        body.bright-mode * {
+            color: black !important;
+        }
+
         main {
             display: flex;
             width: 100vw;
@@ -317,6 +326,14 @@
             gap: 8px;
             flex: 1;
             max-width: 720px;
+            background-color: rgb(18, 18, 18);
+            border-radius: 8px;
+            padding: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        body.bright-mode .panel {
+            background-color: white;
         }
 
         .controls {
@@ -331,6 +348,14 @@
             height: 16px;
             opacity: 0.7;
             transition: opacity 0.2s;
+        }
+
+        body.bright-mode .controls img#previous,
+        body.bright-mode .controls img#next,
+        body.bright-mode .controls img#loop,
+        body.bright-mode .controls img#shuffle {
+            width: 32px;
+            height: 32px;
         }
 
         .controls img:hover {
@@ -664,4 +689,142 @@
                 font-size: 12px;
             }
         }
-  
+        body.bright-mode .header,
+body.bright-mode .playlist,
+body.bright-mode .Home,
+body.bright-mode .nav,
+body.bright-mode .panel,
+body.bright-mode aside,
+body.bright-mode .card,
+body.bright-mode .right p,
+body.bright-mode .left div,
+body.bright-mode .right div {
+    background-color: #f0f0f0 !important;
+}
+
+body.bright-mode .card p,
+body.bright-mode .current-song p,
+body.bright-mode .lists .li-song p,
+body.bright-mode .progress-bar p {
+    color: #222 !important;
+}
+
+body.bright-mode .panel {
+    background-color: #ffffff !important;
+}
+
+body.bright-mode svg {
+    fill: black !important;
+}
+
+body.bright-mode .controls #play {
+    background-color: black !important;
+}
+
+body.bright-mode .right p:hover {
+    background-color: black !important;
+    color: white !important;
+}
+:root {
+  --bg-main: black;
+  --text-main: white;
+}
+body.bright-mode {
+  --bg-main: white;
+  --text-main: black;
+}
+body.bright-mode .controls img,
+body.bright-mode .volume img {
+    filter: invert(1); /* Inverts black icons to white */
+}
+body.bright-mode .lists .li-song img {
+    filter: invert(1);
+}
+body.bright-mode .current-song img {
+    filter: invert(1);
+}
+body.bright-mode h1,
+body.bright-mode h2,
+body.bright-mode h5 {
+    color: black !important;
+}
+* {
+    transition: background-color 0.3s ease, color 0.3s ease, filter 0.3s ease;
+}
+/* Make sure the entire bottom player bar turns white in light mode */
+body.bright-mode .player {
+    background-color: white !important;
+}
+
+/* Left section (song thumbnail + title) */
+body.bright-mode .current-song {
+    background-color: white !important;
+}
+
+/* Right section (volume controls) */
+body.bright-mode .volume {
+    background-color: white !important;
+}
+
+/* Optional: fix music icon if still not visible */
+body.bright-mode .current-song svg {
+    fill: black !important;
+}
+body.bright-mode .volume img,
+body.bright-mode .current-song img {
+    filter: invert(1);
+}
+body.bright-mode .current-song,
+{
+    background-color: #8e7d7d !important;
+    border-radius: 8px;
+}
+body.bright-mode .controls img {
+    background-color: #8e7d7d(0, 49%, 73%);
+    border-radius: 50%;
+    padding: 6px;
+}
+
+body.bright-mode .left div,
+body.bright-mode .right div {
+    background-color: #8e7d7d !important;
+    border-radius: 50% !important;
+}
+body.bright-mode .current-song,
+body.bright-mode .panel,
+body.bright-mode .volume {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+body.bright-mode .right p {
+    background-color: #8e7d7d !important;
+    color: white !important;
+    border-radius: 22px !important;
+    padding: 8px 16px !important;
+}
+
+body.bright-mode .right p:hover {
+    background-color: black !important;
+    color: white !important;
+}
+body.bright-mode .header,
+body.bright-mode .playlist,
+body.bright-mode .Home,
+body.bright-mode .panel,
+body.bright-mode .card {
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+body.bright-mode .controls svg {
+    background-color: #8e7d7d !important;
+    border-radius: 50% !important;
+    padding: 6px;
+    fill: white !important;
+    width: 24px;
+    height: 24px;
+    transition: all 0.3s ease;
+}
+
+body.bright-mode .controls svg:hover {
+    background-color: black !important;
+    fill: white !important;
+}
