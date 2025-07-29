@@ -45,6 +45,17 @@ aside {
   margin-left: 8px;
   font-size: 14px;
   font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.header p:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+.header p:active {
+  background-color: rgba(255, 255, 255, 0.2);
+  transform: scale(0.98);
 }
 
 .header p svg{
@@ -56,7 +67,15 @@ aside {
   padding: 8px;
   margin-left: 8px;
   font-size: 22px;
+  transition: all 0.2s ease;
+}
 
+.header h2:hover {
+  color: #1DB954;
+}
+
+.header h2:active {
+  transform: scale(0.98);
 }
 
 .playlist {
@@ -72,6 +91,17 @@ aside {
   cursor: pointer;
   padding: 10px;
   font-size: 20px;
+  transition: all 0.2s ease;
+}
+
+.playlist p:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+.playlist p:active {
+  background-color: rgba(255, 255, 255, 0.2);
+  transform: scale(0.98);
 }
 
 .playlist p svg{
@@ -112,12 +142,19 @@ aside {
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: all 0.2s ease;
 }
 
 .left div:hover,
 .right div:hover {
   background-color: rgba(255, 255, 255, 0.418);
   color: black;
+}
+
+.left div:active,
+.right div:active {
+  background-color: rgba(255, 255, 255, 0.6);
+  transform: scale(0.95);
 }
 
 .right {
@@ -142,11 +179,17 @@ aside {
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: all 0.2s ease;
 }
 
 .right p:hover {
   background-color: white;
   color: black;
+}
+
+.right p:active {
+  background-color: #e0e0e0;
+  transform: scale(0.95);
 }
 
 .types {
@@ -161,11 +204,16 @@ aside {
   border-radius: 22px;
   font-size: 12px;
   cursor: pointer;
-
+  transition: all 0.2s ease;
 }
 
 .types div:hover{
   background-color: rgba(255, 255, 255, 0.273);
+}
+
+.types div:active {
+  background-color: rgba(255, 255, 255, 0.4);
+  transform: scale(0.95);
 }
 
 .playlists {
@@ -203,11 +251,17 @@ aside {
   font-size: 10px;
   font-weight: 300;
   color: rgb(255, 255, 255);
+  transition: all 0.2s ease;
+  border-radius: 4px;
 }
 
 .lists div:hover {
   background-color: rgba(112, 112, 112, 0.16);
-  
+}
+
+.lists div:active {
+  background-color: rgba(112, 112, 112, 0.3);
+  transform: scale(0.98);
 }
 
 .lists li img{
@@ -235,12 +289,19 @@ aside {
   border-radius: 5px;
   width: 155px;
   height: 200px;
-
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
 .card:hover {
   background-color: rgba(110, 109, 109, 0.249);
-  font-size: 50px;
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+.card:active {
+  transform: translateY(-2px) scale(0.98);
+  background-color: rgba(110, 109, 109, 0.4);
 }
 
 .card h5 {
@@ -286,10 +347,16 @@ aside {
   font-size: smaller;
   margin: 10px;
   cursor: pointer;
+  transition: all 0.2s ease;
 }
 
 .seemore div:hover {
   background-color: rgb(58, 58, 58);
+}
+
+.seemore div:active {
+  background-color: rgb(70, 70, 70);
+  transform: scale(0.95);
 }
 
 i {
@@ -351,6 +418,16 @@ svg {
 
 .controls img{
    cursor: pointer;
+   transition: all 0.2s ease;
+}
+
+.controls img:hover {
+  transform: scale(1.1);
+  filter: brightness(1.2);
+}
+
+.controls img:active {
+  transform: scale(0.95);
 }
 
 .bar{
@@ -405,13 +482,24 @@ svg {
 
 .volume > img{
   width: 20px;
- 
   padding: 4px;
   fill: #b3b3b3;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.volume > img:hover {
+  fill: white;
+  transform: scale(1.1);
+}
+
+.volume > img:active {
+  transform: scale(0.95);
 }
 
 svg:hover{
   fill: rgb(255, 255, 255);
+  transition: all 0.2s ease;
 }
 
 input{
