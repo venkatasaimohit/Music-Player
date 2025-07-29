@@ -133,7 +133,7 @@ aside {
 }
 
 .left div,
-.right div {
+.right .bell-icon{
   background-color: rgb(14, 14, 14);
   width: 30px;
   height: 30px;
@@ -142,20 +142,22 @@ aside {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.2s ease;
+
 }
 
 .left div:hover,
-.right div:hover {
+.right .bell-icon:hover{
   background-color: rgba(255, 255, 255, 0.418);
-  color: black;
+  color: rgb(0, 0, 0);
+}
+.profile:hover{
+  border: 2px solid rgb(223, 212, 212);
+  color:white;
+  transform: scale(1.1);
+  box-shadow: 0 2x 12px rgba(0, 0, 0, 0.2);
+  background-color: rgba(30, 215, 96, 0.1);
 }
 
-.left div:active,
-.right div:active {
-  background-color: rgba(255, 255, 255, 0.6);
-  transform: scale(0.95);
-}
 
 .right {
   display: flex;
@@ -164,9 +166,18 @@ aside {
   gap: 10px;
 }
 
-.right div:hover {
-  background-color: rgba(255, 255, 255, 0.421);
-  color: black;
+.profile{
+  color:black;
+  background-color: pink;
+  border-radius: 50%;
+  width: 29px;
+  height:29px;
+  border:2px solid rgb(168, 145, 149);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .right p {
