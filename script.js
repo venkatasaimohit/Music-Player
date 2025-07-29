@@ -1,5 +1,7 @@
 let currentSongIndex = 0;
 let currentSong = new Audio();
+let isShuffle = false;
+let isRepeat = false;
 let Songs = [];
 const seekbar = document.getElementById("seek-bar");
 let currFolder = "";
@@ -47,10 +49,19 @@ async function getSongs(folder) {
       playMusic(Songs[currentSongIndex].replace(".mp3", ""));
     });
   });
+
+  currentSong.pause();
+  currentSong.src = "";
+  currentSongIndex = 0;
+  play.src = "images/play.svg";
+  document.querySelector(".current-song p").innerHTML = "Select a song";
 }
 
 const playMusic = (track) => {
-  currentSong.src = `${currFolder}/` + track + ".mp3";
+ 
+  currentSong.pause(); 
+  currentSong = new Audio(`${currFolder}/${track}.mp3`);
+  
   currentSong.play();
   play.src = "images/pause.svg";
   document.querySelector(".current-song p").innerHTML = track;
@@ -66,7 +77,18 @@ const playMusic = (track) => {
   });
 
   currentSong.addEventListener("ended", () => {
-    playNextSong();
+    if (isRepeat) {
+      playMusic(Songs[currentSongIndex].replace(".mp3", ""));
+    } else if (isShuffle && Songs.length > 1) {
+      let randomIndex;
+      do {
+        randomIndex = Math.floor(Math.random() * Songs.length);
+      } while (randomIndex === currentSongIndex);
+      currentSongIndex = randomIndex;
+      playMusic(Songs[currentSongIndex].replace(".mp3", ""));
+    } else {
+      playNextSong();
+    }
   });
 };
 
@@ -143,3 +165,23 @@ Array.from(document.getElementsByClassName("card")).forEach((e) => {
 });
 
 main();
+
+document.getElementById("shuffle").addEventListener("click", () => {
+  isShuffle = !isShuffle;
+  document.getElementById("shuffle").classList.toggle("active"); 
+});
+
+document.getElementById("loop").addEventListener("click", () => {
+  isRepeat = !isRepeat;
+  document.getElementById("loop").classList.toggle("active"); 
+});
+
+document.getElementById('theme-toggle').addEventListener('click', function () {
+  document.body.classList.toggle('bright-mode');
+
+  if (document.body.classList.contains('bright-mode')) {
+    this.textContent = 'Dark Mode';
+  } else {
+    this.textContent = 'Light Mode';
+  }
+});
