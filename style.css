@@ -497,7 +497,7 @@ input{
   justify-content: center;
 
 }
-=======
+
 
         * {
             margin: 0;
@@ -1314,7 +1314,7 @@ body.bright-mode .volume img,
 body.bright-mode .current-song img {
     filter: invert(1);
 }
-body.bright-mode .current-song,
+body.bright-mode .current-song
 {
     background-color: #8e7d7d !important;
     border-radius: 8px;
@@ -1368,7 +1368,7 @@ body.bright-mode .controls svg:hover {
     background-color: black !important;
     fill: white !important;
 }
-=======
+
 
 .nav .center {
     display: flex;
