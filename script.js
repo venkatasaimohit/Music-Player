@@ -164,6 +164,48 @@ Array.from(document.getElementsByClassName("card")).forEach((e) => {
   });
 });
 
+// search button features are from here
+function filterSongs(query) {
+  query = query.toLowerCase();
+  let filtered = Songs.filter(song => song.toLowerCase().includes(query));
+  let SongDiv = document.querySelector(".lists ul");
+  SongDiv.innerHTML = "";
+  for (const song of filtered) {
+    SongDiv.innerHTML += `
+      <li>
+        <div class="li-song">
+          <img src="images/music.svg" alt="">
+          <p>${song.replace(".mp3", "")}</p>
+        </div>
+      </li>`;
+  }
+  Array.from(document.querySelectorAll(".lists li")).forEach((e, index) => {
+    e.addEventListener("click", () => {
+      let realIndex = Songs.findIndex(s => s === filtered[index]);
+      if (realIndex !== -1) {
+        currentSongIndex = realIndex;
+        playMusic(Songs[currentSongIndex].replace(".mp3", ""));
+      }
+    });
+  });
+}
+
+document.getElementById("search-btn").addEventListener("click", function() {
+  let val = document.getElementById("search-input").value;
+  filterSongs(val);
+});
+document.getElementById("search-input").addEventListener("input", function(e) {
+  filterSongs(e.target.value);
+});
+
+document.getElementById('sidebar-search-btn').addEventListener('click', function() {
+  const searchInput = document.getElementById('search-input');
+  if (searchInput) {
+    searchInput.focus();
+    searchInput.scrollIntoView({behavior: 'smooth', block: 'center'});
+  }
+});
+
 main();
 
 document.getElementById("shuffle").addEventListener("click", () => {
