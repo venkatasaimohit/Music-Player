@@ -1,3 +1,5 @@
+const hamburgerBtn = document.getElementById('hamburgerBtn');
+const navLinks = document.getElementById('navLinks');
 let currentSongIndex = 0;
 let currentSong = new Audio();
 let isShuffle = false;
@@ -58,10 +60,10 @@ async function getSongs(folder) {
 }
 
 const playMusic = (track) => {
- 
-  currentSong.pause(); 
+
+  currentSong.pause();
   currentSong = new Audio(`${currFolder}/${track}.mp3`);
-  
+
   currentSong.play();
   play.src = "images/pause.svg";
   document.querySelector(".current-song p").innerHTML = track;
@@ -168,12 +170,12 @@ main();
 
 document.getElementById("shuffle").addEventListener("click", () => {
   isShuffle = !isShuffle;
-  document.getElementById("shuffle").classList.toggle("active"); 
+  document.getElementById("shuffle").classList.toggle("active");
 });
 
 document.getElementById("loop").addEventListener("click", () => {
   isRepeat = !isRepeat;
-  document.getElementById("loop").classList.toggle("active"); 
+  document.getElementById("loop").classList.toggle("active");
 });
 
 document.getElementById('theme-toggle').addEventListener('click', function () {
@@ -185,3 +187,10 @@ document.getElementById('theme-toggle').addEventListener('click', function () {
     this.textContent = 'Light Mode';
   }
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+  hamburgerBtn.addEventListener('click', () => {
+    navLinks.classList.toggle('show');
+  });
+})
+
