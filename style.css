@@ -34,7 +34,7 @@ aside {
   margin: 10px;
   width: 100%;
   border-radius: 10px;
-  height: 16.5%;
+  height: 18.5%;
   overflow: hidden;
 
 }
@@ -102,8 +102,8 @@ aside {
   align-items: center;
 }
 
-.left div,
-.right div {
+.left div, .r-div
+ {
   background-color: rgb(14, 14, 14);
   width: 30px;
   height: 30px;
@@ -469,4 +469,30 @@ input{
 ::-webkit-scrollbar {
   width: 8px; /* Width of the scrollbar */
   height: 12px; /* Height of the scrollbar (for horizontal scrollbar) */
+}
+
+#searchbar {
+  background-color: rgb(45, 45, 45);
+  border-radius: 12px;
+}
+
+#searchbar:hover {
+  border: 0.8px solid whitesmoke;
+}
+#home-logo {
+  background-color: rgb(45, 45, 45);
+  border-radius: 12px;
+  margin-bottom: 3px;
+  width: 80px;
+}
+.login{
+  background-color: white;
+  color: black;
+  width: 60px;
+  height: 40px;
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
 }
