@@ -45,6 +45,17 @@ aside {
   margin-left: 8px;
   font-size: 14px;
   font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.header p:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+.header p:active {
+  background-color: rgba(255, 255, 255, 0.2);
+  transform: scale(0.98);
 }
 
 .header p svg{
@@ -56,7 +67,15 @@ aside {
   padding: 8px;
   margin-left: 8px;
   font-size: 22px;
+  transition: all 0.2s ease;
+}
 
+.header h2:hover {
+  color: #1DB954;
+}
+
+.header h2:active {
+  transform: scale(0.98);
 }
 
 .playlist {
@@ -72,6 +91,17 @@ aside {
   cursor: pointer;
   padding: 10px;
   font-size: 20px;
+  transition: all 0.2s ease;
+}
+
+.playlist p:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+.playlist p:active {
+  background-color: rgba(255, 255, 255, 0.2);
+  transform: scale(0.98);
 }
 
 .playlist p svg{
@@ -112,7 +142,7 @@ aside {
   display: flex;
   align-items: center;
   justify-content: center;
-  
+
 }
 
 .left div:hover,
@@ -160,11 +190,17 @@ aside {
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: all 0.2s ease;
 }
 
 .right p:hover {
   background-color: white;
   color: black;
+}
+
+.right p:active {
+  background-color: #e0e0e0;
+  transform: scale(0.95);
 }
 
 .types {
@@ -179,11 +215,16 @@ aside {
   border-radius: 22px;
   font-size: 12px;
   cursor: pointer;
-
+  transition: all 0.2s ease;
 }
 
 .types div:hover{
   background-color: rgba(255, 255, 255, 0.273);
+}
+
+.types div:active {
+  background-color: rgba(255, 255, 255, 0.4);
+  transform: scale(0.95);
 }
 
 .playlists {
@@ -221,11 +262,17 @@ aside {
   font-size: 10px;
   font-weight: 300;
   color: rgb(255, 255, 255);
+  transition: all 0.2s ease;
+  border-radius: 4px;
 }
 
 .lists div:hover {
   background-color: rgba(112, 112, 112, 0.16);
-  
+}
+
+.lists div:active {
+  background-color: rgba(112, 112, 112, 0.3);
+  transform: scale(0.98);
 }
 
 .lists li img{
@@ -253,12 +300,19 @@ aside {
   border-radius: 5px;
   width: 155px;
   height: 200px;
-
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
 .card:hover {
   background-color: rgba(110, 109, 109, 0.249);
-  font-size: 50px;
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+.card:active {
+  transform: translateY(-2px) scale(0.98);
+  background-color: rgba(110, 109, 109, 0.4);
 }
 
 .card h5 {
@@ -304,10 +358,16 @@ aside {
   font-size: smaller;
   margin: 10px;
   cursor: pointer;
+  transition: all 0.2s ease;
 }
 
 .seemore div:hover {
   background-color: rgb(58, 58, 58);
+}
+
+.seemore div:active {
+  background-color: rgb(70, 70, 70);
+  transform: scale(0.95);
 }
 
 i {
@@ -369,6 +429,16 @@ svg {
 
 .controls img{
    cursor: pointer;
+   transition: all 0.2s ease;
+}
+
+.controls img:hover {
+  transform: scale(1.1);
+  filter: brightness(1.2);
+}
+
+.controls img:active {
+  transform: scale(0.95);
 }
 
 .bar{
@@ -423,13 +493,24 @@ svg {
 
 .volume > img{
   width: 20px;
- 
   padding: 4px;
   fill: #b3b3b3;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.volume > img:hover {
+  fill: white;
+  transform: scale(1.1);
+}
+
+.volume > img:active {
+  transform: scale(0.95);
 }
 
 svg:hover{
   fill: rgb(255, 255, 255);
+  transition: all 0.2s ease;
 }
 
 input{
@@ -487,4 +568,88 @@ input{
 ::-webkit-scrollbar {
   width: 8px; /* Width of the scrollbar */
   height: 12px; /* Height of the scrollbar (for horizontal scrollbar) */
+}
+
+body.bright-mode {
+  background-color: #f5f5f5;
+  color: #111;
+}
+
+body.bright-mode .controls img {
+  filter: invert(0); 
+}
+
+body.bright-mode .Home,
+body.bright-mode .player,
+body.bright-mode .header,
+body.bright-mode .playlist,
+body.bright-mode .nav,  
+body.bright-mode aside {
+  background-color: #f2f2f2;
+  color: black;
+  border-color: #ccc;
+}
+
+body.bright-mode .controls img {
+  filter: invert(0); 
+}
+
+body.bright-mode h1,
+body.bright-mode h2,
+body.bright-mode h3,
+body.bright-mode h5,
+body.bright-mode p,
+body.bright-mode a,
+body.bright-mode span,
+body.bright-mode div {
+  color: #111;
+}
+
+body.bright-mode .controls img {
+  filter: brightness(1) invert(1);
+}
+
+body.bright-mode .volume img {
+  filter: brightness(1) invert(1);
+}
+
+body.bright-mode .current-song img {
+  filter: brightness(1) invert(1);
+}
+
+body.bright-mode .li-song img {
+  filter: brightness(1) invert(1);
+}
+
+body.bright-mode .right p ,
+body.bright-mode .right div {
+  color: white;
+  background-color: #393b3b96;
+}
+
+body.bright-mode .right p:hover ,
+body.bright-mode .right div:hover {
+  color: black;
+}
+
+body.bright-mode .left div {
+  background-color: #393b3b96;
+}
+
+body.bright-mode .left div:hover {
+  background-color: black;
+}
+
+body.bright-mode main {
+  background-color: #c6e6db96;
+}
+
+body.bright-mode aside{
+  background-color: #c6e6db96;
+}
+
+#shuffle.active,
+#loop.active {
+  filter: brightness(1.4) invert(0.8); 
+  background-color: rgba(167, 198, 199, 0.212);
 }

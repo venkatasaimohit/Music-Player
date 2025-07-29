@@ -1,4 +1,3 @@
-Deployment : https://vaibhavrajharsh.github.io/Music-Player/
 # 🎶 Music Player Web App  
 
 A simple and elegant **Music Player Web App** to enjoy your favorite tracks. It comes with essential features like play, pause, navigation between songs, playlist browsing, and a smooth, responsive seekbar for an enhanced user experience.
