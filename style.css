@@ -121,9 +121,11 @@ aside {
   color: rgb(0, 0, 0);
 }
 .profile:hover{
-  background-color: black;
-  border:2px solid rgb(122, 119, 119);
+  border: 2px solid rgb(223, 212, 212);
   color:white;
+  transform: scale(1.1);
+  box-shadow: 0 2x 12px rgba(0, 0, 0, 0.2);
+  background-color: rgba(30, 215, 96, 0.1);
 }
 
 
@@ -135,6 +137,7 @@ aside {
 }
 
 .profile{
+  color:black;
   background-color: pink;
   border-radius: 50%;
   width: 29px;
@@ -144,7 +147,7 @@ aside {
   display: flex;
   align-items: center;
   justify-content: center;
-  color:black;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .right p {
