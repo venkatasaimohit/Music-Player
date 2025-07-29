@@ -221,7 +221,9 @@ document.getElementById("loop").addEventListener("click", () => {
 });
 
 document.getElementById('theme-toggle').addEventListener('click', function () {
+  console.log('Theme toggle clicked');
   document.body.classList.toggle('bright-mode');
+  console.log('bright-mode class toggled:', document.body.classList.contains('bright-mode'));
 
   if (document.body.classList.contains('bright-mode')) {
     this.textContent = 'Dark Mode';
