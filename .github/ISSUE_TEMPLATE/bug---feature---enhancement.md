@@ -1,6 +1,6 @@
 ---
 name: BUG | FEATURE | ENHANCEMENT
-about: use this template
+about: select this to raise an issue.
 title: ''
 labels: GSsoC'25
 assignees: ''
