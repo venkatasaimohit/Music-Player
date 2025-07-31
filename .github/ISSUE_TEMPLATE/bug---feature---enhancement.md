@@ -1,8 +1,8 @@
 ---
-name: Custom issue template
-about: Describe this issue template's purpose here.
+name: BUG | FEATURE | ENHANCEMENT
+about: use this template
 title: ''
-labels: ''
+labels: GSsoC'25
 assignees: ''
 
 ---
