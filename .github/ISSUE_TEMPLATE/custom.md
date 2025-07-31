@@ -1,3 +1,12 @@
+---
+name: Custom issue template
+about: Describe this issue template's purpose here.
+title: ''
+labels: ''
+assignees: ''
+
+---
+
 ## 🏷️ Issue Title:
 <!-- A short, clear title for the issue -->
 <Write your issue title here>
@@ -22,5 +31,3 @@
 - [ ] I have searched for existing issues.
 - [ ] I have provided all necessary information.
 - [ ] I’m willing to work on this issue (if applicable).
-
-
