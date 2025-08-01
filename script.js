@@ -102,12 +102,9 @@ const playPreviousSong = () => {
   playMusic(Songs[currentSongIndex].replace(".mp3", ""));
 };
 
-async function main() {
-  await getSongs("musics/PartySongs");
-
-  play.addEventListener("click", () => {
-    if (!currentSong.src || currentSong.paused) {
-      if (!currentSong.src) {
+const togglePlayPause = () => {
+  if (!currentSong.src || currentSong.paused) {
+     if (!currentSong.src) {
         currentSongIndex = 0;
         playMusic(Songs[currentSongIndex].replace(".mp3", ""));
       } else {
@@ -118,6 +115,68 @@ async function main() {
       currentSong.pause();
       play.src = "images/play.svg";
     }
+  }
+  
+  // Keyboard Accessibility Enhancements
+const initializeKeyboardShortcuts = () => {
+  document.addEventListener("keydown", (e) => {
+    switch (e.code) {
+      case "Space":
+        e.preventDefault(); // Prevent scroll
+        togglePlayPause();
+        break;
+
+      case "ArrowRight":
+        playNextSong();
+        break;
+
+      case "ArrowLeft":
+        playPreviousSong();
+        break;
+
+      case "ArrowUp":
+        currentSong.volume = Math.min(currentSong.volume + 0.1, 1);
+        document.querySelector("#volume").value = currentSong.volume * 100;
+        break;
+
+      case "ArrowDown":
+        currentSong.volume = Math.max(currentSong.volume - 0.1, 0);
+        document.querySelector("#volume").value = currentSong.volume * 100;
+        break;
+
+      case "KeyM":
+        const volumeIcon = document.querySelector(".volume>img");
+        const volumeSlider = document.querySelector("#volume");
+        if (currentSong.volume > 0) {
+          currentSong.volume = 0;
+          volumeSlider.value = 0;
+          volumeIcon.src = "images/mute.svg";
+        } else {
+          currentSong.volume = 0.1;
+          volumeSlider.value = 10;
+          volumeIcon.src = "images/volume.svg";
+        }
+        break;
+
+      case "KeyS":
+        isShuffle = !isShuffle;
+        document.getElementById("shuffle").classList.toggle("active");
+        break;
+
+      case "KeyL":
+        isRepeat = !isRepeat;
+        document.getElementById("loop").classList.toggle("active");
+        break;
+    }
+  });
+};
+
+
+async function main() {
+  await getSongs("musics/PartySongs");
+
+  play.addEventListener("click", () => {
+   togglePlayPause();
   });
 
   previous.addEventListener("click", () => {
@@ -198,7 +257,7 @@ document.getElementById("search-input").addEventListener("input", function(e) {
   filterSongs(e.target.value);
 });
 
-document.getElementById('sidebar-search-btn').addEventListener('click', function() {
+document.getElementById('search-btn').addEventListener('click', function() {
   const searchInput = document.getElementById('search-input');
   if (searchInput) {
     searchInput.focus();
@@ -227,3 +286,5 @@ document.getElementById('theme-toggle').addEventListener('click', function () {
     this.textContent = 'Light Mode';
   }
 });
+
+initializeKeyboardShortcuts();
