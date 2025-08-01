@@ -102,9 +102,12 @@ const playPreviousSong = () => {
   playMusic(Songs[currentSongIndex].replace(".mp3", ""));
 };
 
+
 const togglePlayPause = () => {
   if (!currentSong.src || currentSong.paused) {
      if (!currentSong.src) {
+
+
         currentSongIndex = 0;
         playMusic(Songs[currentSongIndex].replace(".mp3", ""));
       } else {
@@ -257,6 +260,7 @@ document.getElementById("search-input").addEventListener("input", function(e) {
   filterSongs(e.target.value);
 });
 
+
 document.getElementById('search-btn').addEventListener('click', function() {
   const searchInput = document.getElementById('search-input');
   if (searchInput) {
@@ -264,6 +268,8 @@ document.getElementById('search-btn').addEventListener('click', function() {
     searchInput.scrollIntoView({behavior: 'smooth', block: 'center'});
   }
 });
+
+
 
 main();
 
@@ -281,9 +287,9 @@ document.getElementById('theme-toggle').addEventListener('click', function () {
   document.body.classList.toggle('bright-mode');
 
   if (document.body.classList.contains('bright-mode')) {
-    this.textContent = 'Dark Mode';
-  } else {
     this.textContent = 'Light Mode';
+  } else {
+    this.textContent = 'Dark Mode';
   }
 });
 
