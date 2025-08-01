@@ -1,3 +1,12 @@
+---
+name: BUG | FEATURE | ENHANCEMENT
+about: select this to raise an issue.
+title: ''
+labels: GSsoC'25
+assignees: ''
+
+---
+
 ## 🏷️ Issue Title:
 <!-- A short, clear title for the issue -->
 <Write your issue title here>
@@ -13,7 +22,7 @@
 
 ## 📸 Screenshot (Before):
 <!-- Upload or paste the image showing the current issue (if applicable) -->
-![ Screenshot](url-or-drag-drop-image-here)
+![Before Screenshot](url-or-drag-drop-image-here)
 
 ## 💡 Additional Changes You Can Do:
 <!-- Describe if you're willing to contribute or suggest improvements beyond the main issue -->
