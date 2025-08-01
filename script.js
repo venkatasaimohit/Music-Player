@@ -103,6 +103,9 @@ const playPreviousSong = () => {
 };
 
 async function main() {
+  document.body.classList.add('bright-mode');
+  document.getElementById("theme-toggle").textContent = 'Light Mode';
+
   await getSongs("musics/PartySongs");
 
   play.addEventListener("click", () => {
@@ -198,13 +201,13 @@ document.getElementById("search-input").addEventListener("input", function(e) {
   filterSongs(e.target.value);
 });
 
-document.getElementById('sidebar-search-btn').addEventListener('click', function() {
-  const searchInput = document.getElementById('search-input');
-  if (searchInput) {
-    searchInput.focus();
-    searchInput.scrollIntoView({behavior: 'smooth', block: 'center'});
-  }
-});
+// document.getElementById('sidebar-search-btn').addEventListener('click', function() {
+//   const searchInput = document.getElementById('search-input');
+//   if (searchInput) {
+//     searchInput.focus();
+//     searchInput.scrollIntoView({behavior: 'smooth', block: 'center'});
+//   }
+// });
 
 main();
 
@@ -222,8 +225,8 @@ document.getElementById('theme-toggle').addEventListener('click', function () {
   document.body.classList.toggle('bright-mode');
 
   if (document.body.classList.contains('bright-mode')) {
-    this.textContent = 'Dark Mode';
-  } else {
     this.textContent = 'Light Mode';
+  } else {
+    this.textContent = 'Dark Mode';
   }
 });
