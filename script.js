@@ -293,4 +293,36 @@ document.getElementById('theme-toggle').addEventListener('click', function () {
   }
 });
 
-initializeKeyboardShortcuts();
+const loginBtn = document.getElementById("login-btn");
+const authSection = document.getElementById("auth-section");
+const backdrop = document.getElementById("auth-backdrop");
+const closeBtn = document.getElementById("close-auth");
+
+loginBtn.addEventListener("click", () => {
+  authSection.classList.add("show");
+  authSection.classList.remove("hidden");
+  backdrop.classList.add("show");
+});
+
+backdrop.addEventListener("click", closeModal);
+closeBtn.addEventListener("click", closeModal);
+
+function closeModal() {
+  authSection.classList.remove("show");
+  authSection.classList.add("hidden");
+  backdrop.classList.remove("show");
+}
+
+document.getElementById("show-login").addEventListener("click", () => {
+  document.getElementById("login-form").classList.remove("hidden");
+  document.getElementById("signup-form").classList.add("hidden");
+  document.getElementById("show-login").classList.add("active");
+  document.getElementById("show-signup").classList.remove("active");
+});
+
+document.getElementById("show-signup").addEventListener("click", () => {
+  document.getElementById("signup-form").classList.remove("hidden");
+  document.getElementById("login-form").classList.add("hidden");
+  document.getElementById("show-signup").classList.add("active");
+  document.getElementById("show-login").classList.remove("active");
+});
