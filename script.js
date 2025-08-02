@@ -102,15 +102,12 @@ const playPreviousSong = () => {
   playMusic(Songs[currentSongIndex].replace(".mp3", ""));
 };
 
-async function main() {
-  document.body.classList.add('bright-mode');
-  document.getElementById("theme-toggle").textContent = 'Light Mode';
 
-  await getSongs("musics/PartySongs");
+const togglePlayPause = () => {
+  if (!currentSong.src || currentSong.paused) {
+     if (!currentSong.src) {
 
-  play.addEventListener("click", () => {
-    if (!currentSong.src || currentSong.paused) {
-      if (!currentSong.src) {
+
         currentSongIndex = 0;
         playMusic(Songs[currentSongIndex].replace(".mp3", ""));
       } else {
@@ -121,6 +118,68 @@ async function main() {
       currentSong.pause();
       play.src = "images/play.svg";
     }
+  }
+  
+  // Keyboard Accessibility Enhancements
+const initializeKeyboardShortcuts = () => {
+  document.addEventListener("keydown", (e) => {
+    switch (e.code) {
+      case "Space":
+        e.preventDefault(); // Prevent scroll
+        togglePlayPause();
+        break;
+
+      case "ArrowRight":
+        playNextSong();
+        break;
+
+      case "ArrowLeft":
+        playPreviousSong();
+        break;
+
+      case "ArrowUp":
+        currentSong.volume = Math.min(currentSong.volume + 0.1, 1);
+        document.querySelector("#volume").value = currentSong.volume * 100;
+        break;
+
+      case "ArrowDown":
+        currentSong.volume = Math.max(currentSong.volume - 0.1, 0);
+        document.querySelector("#volume").value = currentSong.volume * 100;
+        break;
+
+      case "KeyM":
+        const volumeIcon = document.querySelector(".volume>img");
+        const volumeSlider = document.querySelector("#volume");
+        if (currentSong.volume > 0) {
+          currentSong.volume = 0;
+          volumeSlider.value = 0;
+          volumeIcon.src = "images/mute.svg";
+        } else {
+          currentSong.volume = 0.1;
+          volumeSlider.value = 10;
+          volumeIcon.src = "images/volume.svg";
+        }
+        break;
+
+      case "KeyS":
+        isShuffle = !isShuffle;
+        document.getElementById("shuffle").classList.toggle("active");
+        break;
+
+      case "KeyL":
+        isRepeat = !isRepeat;
+        document.getElementById("loop").classList.toggle("active");
+        break;
+    }
+  });
+};
+
+
+async function main() {
+  await getSongs("musics/PartySongs");
+
+  play.addEventListener("click", () => {
+   togglePlayPause();
   });
 
   previous.addEventListener("click", () => {
@@ -201,13 +260,16 @@ document.getElementById("search-input").addEventListener("input", function(e) {
   filterSongs(e.target.value);
 });
 
-// document.getElementById('sidebar-search-btn').addEventListener('click', function() {
-//   const searchInput = document.getElementById('search-input');
-//   if (searchInput) {
-//     searchInput.focus();
-//     searchInput.scrollIntoView({behavior: 'smooth', block: 'center'});
-//   }
-// });
+
+document.getElementById('search-btn').addEventListener('click', function() {
+  const searchInput = document.getElementById('search-input');
+  if (searchInput) {
+    searchInput.focus();
+    searchInput.scrollIntoView({behavior: 'smooth', block: 'center'});
+  }
+});
+
+
 
 main();
 
@@ -229,38 +291,4 @@ document.getElementById('theme-toggle').addEventListener('click', function () {
   } else {
     this.textContent = 'Dark Mode';
   }
-});
-
-const loginBtn = document.getElementById("login-btn");
-const authSection = document.getElementById("auth-section");
-const backdrop = document.getElementById("auth-backdrop");
-const closeBtn = document.getElementById("close-auth");
-
-loginBtn.addEventListener("click", () => {
-  authSection.classList.add("show");
-  authSection.classList.remove("hidden");
-  backdrop.classList.add("show");
-});
-
-backdrop.addEventListener("click", closeModal);
-closeBtn.addEventListener("click", closeModal);
-
-function closeModal() {
-  authSection.classList.remove("show");
-  authSection.classList.add("hidden");
-  backdrop.classList.remove("show");
-}
-
-document.getElementById("show-login").addEventListener("click", () => {
-  document.getElementById("login-form").classList.remove("hidden");
-  document.getElementById("signup-form").classList.add("hidden");
-  document.getElementById("show-login").classList.add("active");
-  document.getElementById("show-signup").classList.remove("active");
-});
-
-document.getElementById("show-signup").addEventListener("click", () => {
-  document.getElementById("signup-form").classList.remove("hidden");
-  document.getElementById("login-form").classList.add("hidden");
-  document.getElementById("show-signup").classList.add("active");
-  document.getElementById("show-login").classList.remove("active");
 });

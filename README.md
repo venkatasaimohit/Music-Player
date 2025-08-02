@@ -4,6 +4,29 @@ A simple and elegant **Music Player Web App** to enjoy your favorite tracks. It 
 
 ---
 
+## Table Of content
+🎶 Music Player Web App
+
+🌟 Features
+
+📸 Screenshots
+
+🛠️ Technologies Used
+
+📂 Project Structure
+
+🚀 Getting Started
+
+📈 Future Enhancements
+
+🤝 Contributing
+
+📄 License
+
+👨‍💻 Author
+
+---
+
 ## 🌟 Features  
 
 - **Play and Pause Music**  
@@ -20,6 +43,16 @@ A simple and elegant **Music Player Web App** to enjoy your favorite tracks. It 
 
 - **Mobile-Responsive Design**  
   Fully functional on both desktop and mobile devices.  
+
+---
+
+## ScreenShots
+
+1. Home Page in Light Mode
+![Home Page (Light)](screenshots/home.png)
+
+2. Home Page in Dark Mode
+![Home Page (Dark)](screenshots/dark.png)
 
 ---
 
@@ -57,11 +90,15 @@ git clone https://github.com/vaibhavrajharsh/Music-Player.git
 Step 2: Open the Project
 Navigate to the project folder and open the index.html file in your browser to start using the app.
 
-📈 Future Enhancements
+---
+
+## 📈 Future Enhancements
 Add shuffle and repeat features.
 Support for drag-and-drop playlist creation.
 Integration with online music APIs for a dynamic playlist.
-🤝 Contributing
+
+---
+## 🤝 Contributing
 Contributions are welcome!
 
 Fork the repository.
@@ -80,8 +117,13 @@ git push origin feature-name
 ````
 Open a pull request..
 
-📄 License<br>
-- This project is licensed under the MIT License.
+---
 
-👨‍💻 Author<br>
+## 📄 License<br>
+- This project is licensed under the MIT License.
+---
+
+
+## 👨‍💻 Author<br>
 - Developed by VaibhaV.
+---
