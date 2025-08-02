@@ -326,3 +326,106 @@ document.getElementById("show-signup").addEventListener("click", () => {
   document.getElementById("show-signup").classList.add("active");
   document.getElementById("show-login").classList.remove("active");
 });
+
+// Hamburger Menu Functionality
+const hamburgerBtn = document.getElementById("hamburgerBtn");
+const navLinks = document.getElementById("navLinks");
+
+if (hamburgerBtn && navLinks) {
+  hamburgerBtn.addEventListener("click", () => {
+    navLinks.classList.toggle("show");
+    
+    // Update hamburger button text
+    if (navLinks.classList.contains("show")) {
+      hamburgerBtn.innerHTML = "&#10005;"; // X symbol
+      hamburgerBtn.setAttribute("aria-label", "Close Menu");
+    } else {
+      hamburgerBtn.innerHTML = "&#9776;"; // Hamburger symbol
+      hamburgerBtn.setAttribute("aria-label", "Open Menu");
+    }
+  });
+
+  // Close menu when clicking outside
+  document.addEventListener("click", (event) => {
+    if (!hamburgerBtn.contains(event.target) && !navLinks.contains(event.target)) {
+      navLinks.classList.remove("show");
+      hamburgerBtn.innerHTML = "&#9776;";
+      hamburgerBtn.setAttribute("aria-label", "Open Menu");
+    }
+  });
+
+  // Close menu when pressing Escape key
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && navLinks.classList.contains("show")) {
+      navLinks.classList.remove("show");
+      hamburgerBtn.innerHTML = "&#9776;";
+      hamburgerBtn.setAttribute("aria-label", "Open Menu");
+    }
+  });
+
+  // Mobile navigation functionality
+  const mobileThemeToggle = document.getElementById("mobile-theme-toggle");
+  const mobileLogin = document.getElementById("mobile-login");
+  const mobilePremium = document.getElementById("mobile-premium");
+  const mobileInstall = document.getElementById("mobile-install");
+
+  // Theme toggle functionality
+  if (mobileThemeToggle) {
+    mobileThemeToggle.addEventListener("click", (e) => {
+      e.preventDefault();
+      document.body.classList.toggle('bright-mode');
+      
+      if (document.body.classList.contains('bright-mode')) {
+        mobileThemeToggle.textContent = 'Light Mode';
+      } else {
+        mobileThemeToggle.textContent = 'Dark Mode';
+      }
+      
+      // Close menu after action
+      navLinks.classList.remove("show");
+      hamburgerBtn.innerHTML = "&#9776;";
+      hamburgerBtn.setAttribute("aria-label", "Open Menu");
+    });
+  }
+
+  // Login functionality
+  if (mobileLogin) {
+    mobileLogin.addEventListener("click", (e) => {
+      e.preventDefault();
+      authSection.classList.add("show");
+      authSection.classList.remove("hidden");
+      backdrop.classList.add("show");
+      
+      // Close menu after action
+      navLinks.classList.remove("show");
+      hamburgerBtn.innerHTML = "&#9776;";
+      hamburgerBtn.setAttribute("aria-label", "Open Menu");
+    });
+  }
+
+  // Premium functionality (placeholder)
+  if (mobilePremium) {
+    mobilePremium.addEventListener("click", (e) => {
+      e.preventDefault();
+      alert("Explore Premium feature coming soon!");
+      
+      // Close menu after action
+      navLinks.classList.remove("show");
+      hamburgerBtn.innerHTML = "&#9776;";
+      hamburgerBtn.setAttribute("aria-label", "Open Menu");
+    });
+  }
+
+  // Install App functionality (placeholder)
+  if (mobileInstall) {
+    mobileInstall.addEventListener("click", (e) => {
+      e.preventDefault();
+      alert("Install App feature coming soon!");
+      
+      // Close menu after action
+      navLinks.classList.remove("show");
+      hamburgerBtn.innerHTML = "&#9776;";
+      hamburgerBtn.setAttribute("aria-label", "Open Menu");
+    });
+  }
+}
