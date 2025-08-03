@@ -16,11 +16,32 @@ body {
   overflow-y: hidden;
 }
 
+body, html {
+    overflow-x: hidden; /* Prevent horizontal scrolling globally */
+}
+
 main {
   display: flex;
   width: 100vw;
   gap: 10px;
   height: calc(100vh - 90px);
+}
+
+.main-content .Home {
+    flex: 1;
+    width: 100%;  /* Ensure it stretches full width inside main-content */
+}
+
+
+
+.main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: #121212;
+    overflow-y: auto;
+    overflow-x: hidden; /* Ensure no horizontal scroll */
+    width: 100%; /* Fit perfectly */
 }
 
 aside {
@@ -74,6 +95,26 @@ aside {
   gap: 10px;
   transition: background 0.2s, color 0.2s;
 }
+
+aside .header p.active {
+    position: relative;
+    font-weight: bold; /* makes the active button text slightly prominent */
+    background-color: #1db954; /* uses the text color already set */
+    border-radius: 2px;
+}
+
+aside .header p.active::before {
+    content: "";
+    position: absolute;
+    left: -10px; /* adjust if needed based on sidebar padding */
+    top: 50%;
+    transform: translateY(-50%);
+    width: 4px; /* thin indicator line */
+    height: 50%;
+    background-color: #1db954; /* uses the text color already set */
+    border-radius: 2px;
+}
+
 
 #home-logo,
 #searchbar {

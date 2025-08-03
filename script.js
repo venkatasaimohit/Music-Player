@@ -6,6 +6,11 @@ let Songs = [];
 const seekbar = document.getElementById("seek-bar");
 let currFolder = "";
 
+const play = document.getElementById("play");
+const previous = document.getElementById("previous");
+const next = document.getElementById("next");
+
+
 function convertSeconds(seconds) {
   let minutes = Math.floor(seconds / 60);
   let remainingSeconds = Math.floor(seconds % 60);
@@ -13,26 +18,29 @@ function convertSeconds(seconds) {
 }
 
 async function getSongs(folder) {
-  Songs = [];
+  Songs = []; // ✅ Clear songs
   currFolder = folder;
 
-  let a = await fetch(`${folder}/`);  // ✅ fixed fetch path
+  let a = await fetch(`${folder}/`);
   let response = await a.text();
 
   let div = document.createElement("div");
   div.innerHTML = response;
   let list = div.getElementsByTagName("a");
 
+  // ✅ Extract songs
   for (let i = 0; i < list.length; i++) {
     const element = list[i];
     if (element.href.endsWith(".mp3")) {
-      Songs.push(decodeURIComponent(element.href.split(`${folder}/`)[1]));  // ✅ fixed broken song URL
+      Songs.push(decodeURIComponent(element.href.split(`${folder}/`)[1]));
     }
   }
 
+  // ✅ Clear playlist UI first
   let SongDiv = document.querySelector(".lists ul");
   SongDiv.innerHTML = "";
 
+  // ✅ Render songs
   for (const song of Songs) {
     SongDiv.innerHTML += `
       <li>
@@ -43,19 +51,22 @@ async function getSongs(folder) {
       </li>`;
   }
 
-  Array.from(document.querySelectorAll(".lists li")).forEach((e, index) => {
+  // ✅ Attach fresh listeners (remove duplicates automatically by recreating list)
+  Array.from(SongDiv.querySelectorAll("li")).forEach((e, index) => {
     e.addEventListener("click", () => {
       currentSongIndex = index;
       playMusic(Songs[currentSongIndex].replace(".mp3", ""));
     });
   });
 
+  // ✅ Reset current song state
   currentSong.pause();
   currentSong.src = "";
   currentSongIndex = 0;
   play.src = "images/play.svg";
   document.querySelector(".current-song p").innerHTML = "Select a song";
 }
+
 
 const playMusic = (track) => {
  
@@ -219,12 +230,17 @@ document.querySelector(".volume>img").addEventListener("click", (e) => {
   }
 });
 
-// Card click to switch playlist
-Array.from(document.getElementsByClassName("card")).forEach((e) => {
-  e.addEventListener("click", async (item) => {
-    await getSongs(`musics/${item.currentTarget.dataset.folder}`);
+function bindPlaylistCards() {
+  Array.from(document.getElementsByClassName("card")).forEach((e) => {
+    e.replaceWith(e.cloneNode(true)); // ✅ Removes old listeners
   });
-});
+
+  Array.from(document.getElementsByClassName("card")).forEach((e) => {
+    e.addEventListener("click", async (item) => {
+      await getSongs(`musics/${item.currentTarget.dataset.folder}`);
+    });
+  });
+}
 
 // search button features are from here
 function filterSongs(query) {
@@ -252,180 +268,71 @@ function filterSongs(query) {
   });
 }
 
-document.getElementById("search-btn").addEventListener("click", function() {
-  let val = document.getElementById("search-input").value;
-  filterSongs(val);
-});
-document.getElementById("search-input").addEventListener("input", function(e) {
-  filterSongs(e.target.value);
+
+document.addEventListener("DOMContentLoaded", () => {
+  main();
 });
 
-
-document.getElementById('search-btn').addEventListener('click', function() {
-  const searchInput = document.getElementById('search-input');
-  if (searchInput) {
-    searchInput.focus();
-    searchInput.scrollIntoView({behavior: 'smooth', block: 'center'});
-  }
-});
-
-
-
-main();
 
 document.getElementById("shuffle").addEventListener("click", () => {
   isShuffle = !isShuffle;
-  document.getElementById("shuffle").classList.toggle("active"); 
+  document.getElementById("shuffle").classList.toggle("active");
 });
 
 document.getElementById("loop").addEventListener("click", () => {
   isRepeat = !isRepeat;
-  document.getElementById("loop").classList.toggle("active"); 
+  document.getElementById("loop").classList.toggle("active");
 });
 
-document.getElementById('theme-toggle').addEventListener('click', function () {
-  document.body.classList.toggle('bright-mode');
+initializeKeyboardShortcuts();
 
-  if (document.body.classList.contains('bright-mode')) {
-    this.textContent = 'Dark Mode';
-  } else {
-    this.textContent = 'Light Mode';
-  }
-});
 
-const loginBtn = document.getElementById("login-btn");
-const authSection = document.getElementById("auth-section");
-const backdrop = document.getElementById("auth-backdrop");
-const closeBtn = document.getElementById("close-auth");
 
-loginBtn.addEventListener("click", () => {
-  authSection.classList.add("show");
-  authSection.classList.remove("hidden");
-  backdrop.classList.add("show");
-});
 
-backdrop.addEventListener("click", closeModal);
-closeBtn.addEventListener("click", closeModal);
 
-function closeModal() {
-  authSection.classList.remove("show");
-  authSection.classList.add("hidden");
-  backdrop.classList.remove("show");
-}
 
-document.getElementById("show-login").addEventListener("click", () => {
-  document.getElementById("login-form").classList.remove("hidden");
-  document.getElementById("signup-form").classList.add("hidden");
-  document.getElementById("show-login").classList.add("active");
-  document.getElementById("show-signup").classList.remove("active");
-});
 
-document.getElementById("show-signup").addEventListener("click", () => {
-  document.getElementById("signup-form").classList.remove("hidden");
-  document.getElementById("login-form").classList.add("hidden");
-  document.getElementById("show-signup").classList.add("active");
-  document.getElementById("show-login").classList.remove("active");
-});
 
-// Hamburger Menu Functionality
-const hamburgerBtn = document.getElementById("hamburgerBtn");
-const navLinks = document.getElementById("navLinks");
+// // Card click to switch playlist
+// Array.from(document.getElementsByClassName("card")).forEach((e) => {
+//   e.addEventListener("click", async (item) => {
+//     await getSongs(`musics/${item.currentTarget.dataset.folder}`);
+//   });
+// });
 
-if (hamburgerBtn && navLinks) {
-  hamburgerBtn.addEventListener("click", () => {
-    navLinks.classList.toggle("show");
-    
-    // Update hamburger button text
-    if (navLinks.classList.contains("show")) {
-      hamburgerBtn.innerHTML = "&#10005;"; // X symbol
-      hamburgerBtn.setAttribute("aria-label", "Close Menu");
-    } else {
-      hamburgerBtn.innerHTML = "&#9776;"; // Hamburger symbol
-      hamburgerBtn.setAttribute("aria-label", "Open Menu");
-    }
-  });
 
-  // Close menu when clicking outside
-  document.addEventListener("click", (event) => {
-    if (!hamburgerBtn.contains(event.target) && !navLinks.contains(event.target)) {
-      navLinks.classList.remove("show");
-      hamburgerBtn.innerHTML = "&#9776;";
-      hamburgerBtn.setAttribute("aria-label", "Open Menu");
-    }
-  });
 
-  // Close menu when pressing Escape key
-  document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape" && navLinks.classList.contains("show")) {
-      navLinks.classList.remove("show");
-      hamburgerBtn.innerHTML = "&#9776;";
-      hamburgerBtn.setAttribute("aria-label", "Open Menu");
-    }
-  });
+// const loginBtn = document.getElementById("login-btn");
+// const authSection = document.getElementById("auth-section");
+// const backdrop = document.getElementById("auth-backdrop");
+// const closeBtn = document.getElementById("close-auth");
 
-  // Mobile navigation functionality
-  const mobileThemeToggle = document.getElementById("mobile-theme-toggle");
-  const mobileLogin = document.getElementById("mobile-login");
-  const mobilePremium = document.getElementById("mobile-premium");
-  const mobileInstall = document.getElementById("mobile-install");
+// loginBtn.addEventListener("click", () => {
+//   authSection.classList.add("show");
+//   authSection.classList.remove("hidden");
+//   backdrop.classList.add("show");
+// });
 
-  // Theme toggle functionality
-  if (mobileThemeToggle) {
-    mobileThemeToggle.addEventListener("click", (e) => {
-      e.preventDefault();
-      document.body.classList.toggle('bright-mode');
-      
-      if (document.body.classList.contains('bright-mode')) {
-        mobileThemeToggle.textContent = 'Light Mode';
-      } else {
-        mobileThemeToggle.textContent = 'Dark Mode';
-      }
-      
-      // Close menu after action
-      navLinks.classList.remove("show");
-      hamburgerBtn.innerHTML = "&#9776;";
-      hamburgerBtn.setAttribute("aria-label", "Open Menu");
-    });
-  }
+// backdrop.addEventListener("click", closeModal);
+// closeBtn.addEventListener("click", closeModal);
 
-  // Login functionality
-  if (mobileLogin) {
-    mobileLogin.addEventListener("click", (e) => {
-      e.preventDefault();
-      authSection.classList.add("show");
-      authSection.classList.remove("hidden");
-      backdrop.classList.add("show");
-      
-      // Close menu after action
-      navLinks.classList.remove("show");
-      hamburgerBtn.innerHTML = "&#9776;";
-      hamburgerBtn.setAttribute("aria-label", "Open Menu");
-    });
-  }
+// function closeModal() {
+//   authSection.classList.remove("show");
+//   authSection.classList.add("hidden");
+//   backdrop.classList.remove("show");
+// }
 
-  // Premium functionality (placeholder)
-  if (mobilePremium) {
-    mobilePremium.addEventListener("click", (e) => {
-      e.preventDefault();
-      alert("Explore Premium feature coming soon!");
-      
-      // Close menu after action
-      navLinks.classList.remove("show");
-      hamburgerBtn.innerHTML = "&#9776;";
-      hamburgerBtn.setAttribute("aria-label", "Open Menu");
-    });
-  }
+// document.getElementById("show-login").addEventListener("click", () => {
+//   document.getElementById("login-form").classList.remove("hidden");
+//   document.getElementById("signup-form").classList.add("hidden");
+//   document.getElementById("show-login").classList.add("active");
+//   document.getElementById("show-signup").classList.remove("active");
+// });
 
-  // Install App functionality (placeholder)
-  if (mobileInstall) {
-    mobileInstall.addEventListener("click", (e) => {
-      e.preventDefault();
-      alert("Install App feature coming soon!");
-      
-      // Close menu after action
-      navLinks.classList.remove("show");
-      hamburgerBtn.innerHTML = "&#9776;";
-      hamburgerBtn.setAttribute("aria-label", "Open Menu");
-    });
-  }
-}
+// document.getElementById("show-signup").addEventListener("click", () => {
+//   document.getElementById("signup-form").classList.remove("hidden");
+//   document.getElementById("login-form").classList.add("hidden");
+//   document.getElementById("show-signup").classList.add("active");
+//   document.getElementById("show-login").classList.remove("active");
+// });
+
