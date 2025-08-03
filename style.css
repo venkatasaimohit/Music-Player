@@ -409,19 +409,42 @@ svg {
   align-items: center;
   overflow: hidden;
 }
+
 .controls {
-  width: min-content;
   display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
 }
 
 .controls img {
-  background-color: #b0b0b036;
-  color: black;
+  cursor: pointer;
+  opacity: 0.7;
   width: 32px;
   height: 32px;
+  background: transparent;
   border-radius: 50%;
-  padding: 6px;
+  transition: all 0.25s ease;
+}
+.controls img:hover {
+  opacity: 1;
+  transform: scale(1.15);
+}
+
+.controls #play {
+  width: 48px;
+  height: 48px;
+  background: #1db954;
+  border-radius: 50%;
   padding: 10px;
+  opacity: 1;
+  box-shadow: 0 4px 12px rgba(29, 185, 84, 0.5);
+  transition: all 0.3s ease;
+}
+.controls #play:hover {
+  background: #1ed760;
+  transform: scale(1.2);
+  box-shadow: 0 6px 16px rgba(29, 185, 84, 0.7);
 }
 
 .vol-bar {
