@@ -21,6 +21,7 @@
       href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
+
   </head>
 
 
@@ -37,6 +38,9 @@
           <p id="searchbar">
             <i class="fa-solid fa-magnifying-glass"></i> Search
           </p>
+
+
+   
         </div>
 
         <div class="playlist">
@@ -134,12 +138,30 @@
           />
           <p class="duration">00:00</p>
         </div>
+
       </div>
       <div class="volume">
         <img src="images/volume.svg" alt="" />
         <input id="volume" type="range" max="100" min="0" value="100" />
       </div>
+
     </div>
+    <div id="auth-backdrop" class="hidden"></div>
+
+    <div class="auth-container hidden" id="auth-section">
+        <button class="close-btn" id="close-auth">&times;</button>
+        <div class="auth-toggle">
+            <button id="show-login" class="active">Login</button>
+            <button id="show-signup">Sign Up</button>
+        </div>
+
+        <form id="login-form" class="auth-form">
+            <h2>Login</h2>
+            <input type="email" placeholder="Email" required />
+            <input type="password" placeholder="Password" required />
+            <button type="submit">Log In</button>
+        </form>
+
 
     <script>
       // Load Home Page by default
@@ -225,6 +247,7 @@
         activeBtn.classList.add("active");
       }
     </script>
+
 
     <script src="script.js"></script>
   </body>
