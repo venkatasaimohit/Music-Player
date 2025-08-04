@@ -5,6 +5,12 @@ let isRepeat = false;
 let Songs = [];
 const seekbar = document.getElementById("seek-bar");
 let currFolder = "";
+let likedPlaylists = JSON.parse(localStorage.getItem("likedPlaylists") || "[]");
+
+function saveLikedPlaylists() {
+  localStorage.setItem("likedPlaylists", JSON.stringify(likedPlaylists));
+}
+
 
 const play = document.getElementById("play");
 const previous = document.getElementById("previous");
@@ -269,10 +275,6 @@ function filterSongs(query) {
 }
 
 
-document.addEventListener("DOMContentLoaded", () => {
-  main();
-});
-
 
 document.getElementById("shuffle").addEventListener("click", () => {
   isShuffle = !isShuffle;
@@ -285,6 +287,71 @@ document.getElementById("loop").addEventListener("click", () => {
 });
 
 initializeKeyboardShortcuts();
+// ---------- LIKE PLAYLIST FEATURE ----------
+
+function saveLikedPlaylists() {
+  localStorage.setItem("likedPlaylists", JSON.stringify(likedPlaylists));
+}
+
+function updatePlaylistLikeButtons() {
+  document.querySelectorAll(".like-playlist-btn").forEach((btn) => {
+    const folder = btn.dataset.folder;
+    const isLiked = likedPlaylists.includes(folder);
+    btn.classList.toggle("liked", isLiked);
+    btn.innerHTML = `<i class="fa-${isLiked ? "solid" : "regular"} fa-heart"></i>`;
+  });
+}
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  main();
+  updatePlaylistLikeButtons();
+
+  // ✅ Like/unlike playlists (only once)
+  document.addEventListener("click", (e) => {
+    const likeBtn = e.target.closest(".like-playlist-btn");
+    if (likeBtn) {
+      const folder = likeBtn.dataset.folder;
+      const index = likedPlaylists.indexOf(folder);
+      if (index === -1) {
+        likedPlaylists.push(folder);
+      } else {
+        likedPlaylists.splice(index, 1);
+      }
+      saveLikedPlaylists();
+      updatePlaylistLikeButtons();
+      e.stopPropagation();
+    }
+  });
+
+  // ✅ Show liked playlists
+  document.getElementById("liked-songs-link").addEventListener("click", () => {
+    const liked = JSON.parse(localStorage.getItem("likedPlaylists") || "[]");
+    const container = document.querySelector(".liked-cards-container");
+    container.innerHTML = "";
+
+    liked.forEach((folder) => {
+      const originalCard = document.querySelector(`.card[data-folder="${folder}"]`);
+      if (originalCard) {
+        const clone = originalCard.cloneNode(true);
+        clone.addEventListener("click", () => {
+          getSongs(`musics/${folder}`);
+        });
+        container.appendChild(clone);
+      }
+    });
+
+    // ✅ Show popup
+    document.getElementById("liked-playlists-popup").classList.remove("hidden");
+  });
+
+  // ✅ Close liked playlists popup
+  document.getElementById("close-liked-playlists").addEventListener("click", () => {
+    document.getElementById("liked-playlists-popup").classList.add("hidden");
+  });
+});
+
+
 
 
 

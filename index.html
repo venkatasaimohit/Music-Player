@@ -31,13 +31,19 @@
       <!-- Sidebar -->
       <aside>
         <div class="header">
-          <h2>Melody</h2>
+          <h2>
+  <img src="favicon.ico" class="brand-logo" /> Melody
+</h2>
+
           <p id="home-logo" class="active">
             <i class="fa-solid fa-house"></i> Home
           </p>
           <p id="searchbar">
             <i class="fa-solid fa-magnifying-glass"></i> Search
           </p>
+          <p id="liked-songs-link">
+  <i class="fa-solid fa-heart"></i> Liked Songs
+</p>
 
 
    
@@ -147,6 +153,20 @@
 
     </div>
     <div id="auth-backdrop" class="hidden"></div>
+  <div id="liked-playlists-popup" class="popup hidden">
+  <div class="popup-content">
+    <div class="popup-header">
+      <h3>Liked Playlists</h3>
+      <button id="close-liked-playlists" class="close-btn">&times;</button>
+    </div>
+    <div class="popup-body liked-cards-container">
+      <!-- Liked playlists go here -->
+    </div>
+  </div>
+</div>
+
+
+
 
     <div class="auth-container hidden" id="auth-section">
         <button class="close-btn" id="close-auth">&times;</button>

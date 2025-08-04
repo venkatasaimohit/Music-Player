@@ -1,10 +1,13 @@
-<!-- search.html -->
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="search.css" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
     <title>Document</title>
   </head>
   <body>
@@ -106,20 +109,25 @@
               <div class="video-info">
                 <h4>Shape Of You</h4>
                 <p>Ed Sheeran • 5M views</p>
+                <button class="like-btn"><i class="fa-regular fa-heart"></i></button>
               </div>
             </div>
+
             <div class="video-card">
               <img src="./images/Maneskin.png" alt="Gossip" />
               <div class="video-info">
                 <h4>Gossip</h4>
                 <p>Maneskin • 4.6M views</p>
+                <button class="like-btn"><i class="fa-regular fa-heart"></i></button>
               </div>
             </div>
+
             <div class="video-card">
               <img src="./images/Taylor.png" alt="Shake It Off" />
               <div class="video-info">
                 <h4>Shake It Off</h4>
                 <p>Taylor Swift • 4.2M views</p>
+                <button class="like-btn"><i class="fa-regular fa-heart"></i></button>
               </div>
             </div>
 
@@ -129,20 +137,25 @@
               <div class="video-info">
                 <h4>Someone Like You</h4>
                 <p>Adele • 3M views</p>
+                <button class="like-btn"><i class="fa-regular fa-heart"></i></button>
               </div>
             </div>
+
             <div class="video-card">
               <img src="./images/Dua.png" alt="New Rules" />
               <div class="video-info">
                 <h4>New Rules</h4>
                 <p>Dua Lipa • 3.7M views</p>
+                <button class="like-btn"><i class="fa-regular fa-heart"></i></button>
               </div>
             </div>
+
             <div class="video-card">
               <img src="./images/Shakira.png" alt="Waka Waka" />
               <div class="video-info">
                 <h4>Waka Waka</h4>
                 <p>Shakira • 3.5M views</p>
+                <button class="like-btn"><i class="fa-regular fa-heart"></i></button>
               </div>
             </div>
 
@@ -155,5 +168,30 @@
         </div>
       </div>
     </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const buttons = document.querySelectorAll(".like-btn");
+        buttons.forEach((btn) => {
+          btn.addEventListener("click", () => {
+            btn.classList.toggle("liked");
+            const icon = btn.querySelector("i");
+            icon.classList.toggle("fa-regular");
+            icon.classList.toggle("fa-solid");
+
+            const title = btn.closest(".video-info").querySelector("h4")?.textContent;
+            if (!title) return;
+
+            let liked = JSON.parse(localStorage.getItem("likedVideos") || "[]");
+            if (btn.classList.contains("liked")) {
+              if (!liked.includes(title)) liked.push(title);
+            } else {
+              liked = liked.filter((t) => t !== title);
+            }
+            localStorage.setItem("likedVideos", JSON.stringify(liked));
+          });
+        });
+      });
+    </script>
   </body>
 </html>
