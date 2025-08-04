@@ -6,6 +6,11 @@ let Songs = [];
 const seekbar = document.getElementById("seek-bar");
 let currFolder = "";
 
+const play = document.getElementById("play");
+const previous = document.getElementById("previous");
+const next = document.getElementById("next");
+
+
 function convertSeconds(seconds) {
   let minutes = Math.floor(seconds / 60);
   let remainingSeconds = Math.floor(seconds % 60);
@@ -13,27 +18,29 @@ function convertSeconds(seconds) {
 }
 
 async function getSongs(folder) {
-  setupLikeButtons(); 
-  Songs = [];
+  Songs = []; // ✅ Clear songs
   currFolder = folder;
 
-  let a = await fetch(`${folder}/`);  // ✅ fixed fetch path
+  let a = await fetch(`${folder}/`);
   let response = await a.text();
 
   let div = document.createElement("div");
   div.innerHTML = response;
   let list = div.getElementsByTagName("a");
 
+  // ✅ Extract songs
   for (let i = 0; i < list.length; i++) {
     const element = list[i];
     if (element.href.endsWith(".mp3")) {
-      Songs.push(decodeURIComponent(element.href.split(`${folder}/`)[1]));  // ✅ fixed broken song URL
+      Songs.push(decodeURIComponent(element.href.split(`${folder}/`)[1]));
     }
   }
 
+  // ✅ Clear playlist UI first
   let SongDiv = document.querySelector(".lists ul");
   SongDiv.innerHTML = "";
 
+  // ✅ Render songs
   for (const song of Songs) {
     SongDiv.innerHTML += `
       <li>
@@ -44,19 +51,22 @@ async function getSongs(folder) {
       </li>`;
   }
 
-  Array.from(document.querySelectorAll(".lists li")).forEach((e, index) => {
+  // ✅ Attach fresh listeners (remove duplicates automatically by recreating list)
+  Array.from(SongDiv.querySelectorAll("li")).forEach((e, index) => {
     e.addEventListener("click", () => {
       currentSongIndex = index;
       playMusic(Songs[currentSongIndex].replace(".mp3", ""));
     });
   });
 
+  // ✅ Reset current song state
   currentSong.pause();
   currentSong.src = "";
   currentSongIndex = 0;
   play.src = "images/play.svg";
   document.querySelector(".current-song p").innerHTML = "Select a song";
 }
+
 
 const playMusic = (track) => {
  
@@ -195,9 +205,6 @@ async function main() {
     const seekTo = (seekbar.value / 100) * currentSong.duration;
     currentSong.currentTime = seekTo;
   });
-  setupLikeButtons();
-  loadLikedSongs();
-
 }
 
 // Volume control
@@ -223,12 +230,17 @@ document.querySelector(".volume>img").addEventListener("click", (e) => {
   }
 });
 
-// Card click to switch playlist
-Array.from(document.getElementsByClassName("card")).forEach((e) => {
-  e.addEventListener("click", async (item) => {
-    await getSongs(`musics/${item.currentTarget.dataset.folder}`);
+function bindPlaylistCards() {
+  Array.from(document.getElementsByClassName("card")).forEach((e) => {
+    e.replaceWith(e.cloneNode(true)); // ✅ Removes old listeners
   });
-});
+
+  Array.from(document.getElementsByClassName("card")).forEach((e) => {
+    e.addEventListener("click", async (item) => {
+      await getSongs(`musics/${item.currentTarget.dataset.folder}`);
+    });
+  });
+}
 
 // search button features are from here
 function filterSongs(query) {
@@ -256,223 +268,71 @@ function filterSongs(query) {
   });
 }
 
-document.getElementById("search-btn").addEventListener("click", function() {
-  let val = document.getElementById("search-input").value;
-  filterSongs(val);
-});
-document.getElementById("search-input").addEventListener("input", function(e) {
-  filterSongs(e.target.value);
+
+document.addEventListener("DOMContentLoaded", () => {
+  main();
 });
 
-
-document.getElementById('search-btn').addEventListener('click', function() {
-  const searchInput = document.getElementById('search-input');
-  if (searchInput) {
-    searchInput.focus();
-    searchInput.scrollIntoView({behavior: 'smooth', block: 'center'});
-  }
-});
-
-
-
-main();
 
 document.getElementById("shuffle").addEventListener("click", () => {
   isShuffle = !isShuffle;
-  document.getElementById("shuffle").classList.toggle("active"); 
+  document.getElementById("shuffle").classList.toggle("active");
 });
 
 document.getElementById("loop").addEventListener("click", () => {
   isRepeat = !isRepeat;
-  document.getElementById("loop").classList.toggle("active"); 
+  document.getElementById("loop").classList.toggle("active");
 });
 
-document.getElementById('theme-toggle').addEventListener('click', function () {
-  document.body.classList.toggle('bright-mode');
-
-  if (document.body.classList.contains('bright-mode')) {
-    this.textContent = 'Dark Mode';
-  } else {
-    this.textContent = 'Light Mode';
-  }
-});
-
-const loginBtn = document.getElementById("login-btn");
-const authSection = document.getElementById("auth-section");
-const backdrop = document.getElementById("auth-backdrop");
-const closeBtn = document.getElementById("close-auth");
-
-loginBtn.addEventListener("click", () => {
-  authSection.classList.add("show");
-  authSection.classList.remove("hidden");
-  backdrop.classList.add("show");
-});
-
-backdrop.addEventListener("click", closeModal);
-closeBtn.addEventListener("click", closeModal);
-
-function closeModal() {
-  authSection.classList.remove("show");
-  authSection.classList.add("hidden");
-  backdrop.classList.remove("show");
-}
-
-document.getElementById("show-login").addEventListener("click", () => {
-  document.getElementById("login-form").classList.remove("hidden");
-  document.getElementById("signup-form").classList.add("hidden");
-  document.getElementById("show-login").classList.add("active");
-  document.getElementById("show-signup").classList.remove("active");
-});
-
-document.getElementById("show-signup").addEventListener("click", () => {
-  document.getElementById("signup-form").classList.remove("hidden");
-  document.getElementById("login-form").classList.add("hidden");
-  document.getElementById("show-signup").classList.add("active");
-  document.getElementById("show-login").classList.remove("active");
-});
-function setupLikeButtons() {
-  document.querySelectorAll('.like-btn').forEach(button => {
-    const key = getSongKey(button);
-    if (isSongLiked(key)) {
-      button.classList.add('liked');
-      button.innerHTML = '<i class="fa-solid fa-heart"></i>';
-    }
-
-    button.addEventListener('click', () => {
-      button.classList.toggle('liked');
-      const isLiked = button.classList.contains('liked');
-      button.innerHTML = isLiked
-        ? '<i class="fa-solid fa-heart"></i>'
-        : '<i class="fa-regular fa-heart"></i>';
-
-      updateLikedSongsStorage(key, isLiked, button.dataset.title, button.dataset.folder);
-      loadLikedSongs(); // Refresh the liked songs list
-    });
-  });
-}
+initializeKeyboardShortcuts();
 
 
-function getSongKey(button) {
-  return `${button.dataset.folder}_${button.dataset.title}`;
-}
-
-function setupLikeButtons() {
-  document.querySelectorAll('.like-btn').forEach(button => {
-    const key = getSongKey(button);
-    if (isSongLiked(key)) {
-      button.classList.add('liked');
-      button.innerHTML = '<i class="fa-solid fa-heart"></i>';
-    }
-
-    button.addEventListener('click', () => {
-      const isLiked = button.classList.toggle('liked');
-      button.innerHTML = isLiked
-        ? '<i class="fa-solid fa-heart"></i>'
-        : '<i class="fa-regular fa-heart"></i>';
-
-      updateLikedSongsStorage(key, isLiked, button.dataset.title, button.dataset.folder);
-      loadLikedSongs();
-    });
-  });
-}
-
-function updateLikedSongsStorage(key, liked, title, folder) {
-  let likedSongs = JSON.parse(localStorage.getItem('likedSongs')) || {};
-  if (liked) {
-    likedSongs[key] = { title, folder };
-  } else {
-    delete likedSongs[key];
-  }
-  localStorage.setItem('likedSongs', JSON.stringify(likedSongs));
-}
-
-function isSongLiked(key) {
-  const likedSongs = JSON.parse(localStorage.getItem('likedSongs')) || {};
-  return likedSongs.hasOwnProperty(key);
-}
-
-function loadLikedSongs() {
-  const ul = document.getElementById('liked-songs-ul');
-  ul.innerHTML = "";
-  const likedSongs = JSON.parse(localStorage.getItem('likedSongs')) || {};
-
-  for (let key in likedSongs) {
-    const { title, folder } = likedSongs[key];
-    ul.innerHTML += `
-      <li>
-        <div class="li-song" data-folder="${folder}" data-title="${title}">
-          <img src="images/music.svg" alt="">
-          <p>${title}</p>
-        </div>
-      </li>`;
-  }
-
-  // Click to play liked song
-  document.querySelectorAll('.li-song').forEach(e => {
-    e.addEventListener('click', async () => {
-      await getSongs(`musics/${e.dataset.folder}`);
-      const songIndex = Songs.findIndex(s => s.replace('.mp3', '') === e.dataset.title);
-      if (songIndex !== -1) {
-        currentSongIndex = songIndex;
-        playMusic(Songs[currentSongIndex].replace('.mp3', ''));
-      }
-    });
-  });
-}
-
-document.addEventListener("DOMContentLoaded", () => {
-  const likedPopup = document.getElementById("liked-songs-popup");
-  const likedBackdrop = document.getElementById("liked-songs-backdrop");
-  const likedList = document.getElementById("liked-songs-popup-list");
-
-  document.querySelector(".playlist p i.fa-heart").parentElement.addEventListener("click", () => {
-    const likedSongs = JSON.parse(localStorage.getItem("likedSongs")) || {};
-    likedList.innerHTML = "";
-
-    if (Object.keys(likedSongs).length === 0) {
-      likedList.innerHTML = "<li>No liked songs yet.</li>";
-    } else {
-      for (let key in likedSongs) {
-        const { title, folder } = likedSongs[key];
-        likedList.innerHTML += `
-          <li data-folder="${folder}" data-title="${title}">
-            <img src="images/music.svg" style="height:16px; margin-right:8px;" />
-            ${title}
-          </li>`;
-      }
-    }
-
-    likedPopup.classList.remove("hidden");
-    likedBackdrop.classList.remove("hidden");
-  });
-
-  // Close popup
-  document.querySelector(".close-liked-popup").addEventListener("click", () => {
-    likedPopup.classList.add("hidden");
-    likedBackdrop.classList.add("hidden");
-  });
-  likedBackdrop.addEventListener("click", () => {
-    likedPopup.classList.add("hidden");
-    likedBackdrop.classList.add("hidden");
-  });
-
-  // Click song to play
-  likedList.addEventListener("click", async (e) => {
-    if (e.target.tagName === "LI" || e.target.closest("li")) {
-      const li = e.target.closest("li");
-      const folder = li.dataset.folder;
-      const title = li.dataset.title;
-      await getSongs(`musics/${folder}`);
-      const songIndex = Songs.findIndex(s => s.replace('.mp3', '') === title);
-      if (songIndex !== -1) {
-        currentSongIndex = songIndex;
-        playMusic(title);
-        likedPopup.classList.add("hidden");
-        likedBackdrop.classList.add("hidden");
-      }
-    }
-  });
-});
 
 
+
+
+
+
+// // Card click to switch playlist
+// Array.from(document.getElementsByClassName("card")).forEach((e) => {
+//   e.addEventListener("click", async (item) => {
+//     await getSongs(`musics/${item.currentTarget.dataset.folder}`);
+//   });
+// });
+
+
+
+// const loginBtn = document.getElementById("login-btn");
+// const authSection = document.getElementById("auth-section");
+// const backdrop = document.getElementById("auth-backdrop");
+// const closeBtn = document.getElementById("close-auth");
+
+// loginBtn.addEventListener("click", () => {
+//   authSection.classList.add("show");
+//   authSection.classList.remove("hidden");
+//   backdrop.classList.add("show");
+// });
+
+// backdrop.addEventListener("click", closeModal);
+// closeBtn.addEventListener("click", closeModal);
+
+// function closeModal() {
+//   authSection.classList.remove("show");
+//   authSection.classList.add("hidden");
+//   backdrop.classList.remove("show");
+// }
+
+// document.getElementById("show-login").addEventListener("click", () => {
+//   document.getElementById("login-form").classList.remove("hidden");
+//   document.getElementById("signup-form").classList.add("hidden");
+//   document.getElementById("show-login").classList.add("active");
+//   document.getElementById("show-signup").classList.remove("active");
+// });
+
+// document.getElementById("show-signup").addEventListener("click", () => {
+//   document.getElementById("signup-form").classList.remove("hidden");
+//   document.getElementById("login-form").classList.add("hidden");
+//   document.getElementById("show-signup").classList.add("active");
+//   document.getElementById("show-login").classList.remove("active");
+// });
 
