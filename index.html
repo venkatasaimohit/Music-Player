@@ -1,109 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
     />
-    <link rel="stylesheet" href="style.css">
-    <script src="https://kit.fontawesome.com/68dffed02e.js" crossorigin="anonymous"></script>
-    
-    <link rel="icon" href="favicon.ico">
+    <link rel="stylesheet" href="style.css" />
+    <script
+      src="https://kit.fontawesome.com/68dffed02e.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="icon" href="favicon.ico" />
     <title>Melody : Music for everyone</title>
 
-     <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
 
-    <style>
-        /*Loading page*/
-#loading-screen {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    background: #1e1e1e;
-    color: #1ae404;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
-    transition: opacity 0.5s ease, visibility 0.5s ease;
-}
+  </head>
 
-#loading-screen.hidden {
-    opacity: 0;
-    visibility: hidden;
-}
 
-.loader {
-    text-align: center;
-}
 
-.loader i {
-    font-size: 4.5rem;
-    animation: spin 2s linear infinite;
-}
-
-.loader h2 {
-    margin-top: 1.5rem;
-    font-size: 2.1rem;
-}
-
-.dots::after {
-    content: "";
-    display: inline-block;
-    animation: dots 1.5s steps(5, end) infinite;
-}
-
-@keyframes dots {
-    0% {
-        content: "";
-    }
-    20% {
-        content: ".";
-    }
-    40% {
-        content: "..";
-    }
-    60% {
-        content: "...";
-    }
-    80%{
-        content: "....";
-    }
-    100% {
-        content: "";
-    }
-}
-/* Spin Animation */
-@keyframes spin {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
-}
-    </style>
-</head>
-
-<body>
-    <!-- Loading Screen -->
-    <div id="loading-screen">
-        <div class="loader">
-            <i class="fa-solid fa-spinner" style="color: #1ae404;"></i>
-            <h2 style="color: #1ae404;">Loading<span class="dots" style="color: #1ae404;"></span></h2>
-        </div>
-    </div>
+  <body>
     <main>
+
         <!-- side bar -->
         <aside>
             <div class="header">
@@ -234,40 +159,124 @@
 
             </div>
         </div>
+      
+      <!-- Sidebar -->
+      <aside>
+        <div class="header">
+          <h2>Melody</h2>
+          <p id="home-logo" class="active">
+            <i class="fa-solid fa-house"></i> Home
+          </p>
+          <p id="searchbar">
+            <i class="fa-solid fa-magnifying-glass"></i> Search
+          </p>
+
+
+   
         </div>
+
+        <div class="playlist">
+          <p>
+            <svg
+              data-encore-id="icon"
+              role="img"
+              aria-hidden="true"
+              viewBox="0 0 24 24"
+              class="Svg-sc-ytk21e-0 bneLcE"
+            >
+              <path
+                d="M3 22a1 1 0 0 1-1-1V3a1 1 0 0 1 2 0v18a1 1 0 0 1-1 1zM15.5 2.134A1 1 0 0 0 14 3v18a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V6.464a1 1 0 0 0-.5-.866l-6-3.464zM9 2a1 1 0 0 0-1 1v18a1 1 0 1 0 2 0V3a1 1 0 0 0-1-1z"
+              ></path>
+            </svg>
+            Your Library
+          </p>
+          <div class="lists">
+            <ul></ul>
+          </div>
         </div>
+      </aside>
+
+      <!-- Main Content (Dynamic) -->
+      <div class="main-content" id="main-content">
+        <!-- Home content will be dynamically loaded here -->
+      </div>
     </main>
-    <!-- music player and controls -->
+
+    <!-- Music Player -->
     <div class="player">
-        <div class="current-song">
-            <div><img src="images/music.svg" alt="">
-                <p>Song Name</p><svg data-encore-id="icon" role="img" aria-hidden="true" viewBox="0 0 16 16"
-                    class="Svg-sc-ytk21e-0 ceOVVX">
-                    <path
-                        d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm11.748-1.97a.75.75 0 0 0-1.06-1.06l-4.47 4.47-1.405-1.406a.75.75 0 1 0-1.061 1.06l2.466 2.467 5.53-5.53z">
-                    </path>
-                </svg>
-            </div>
+      <div class="current-song">
+        <div>
+          <img src="images/music.svg" alt="" />
+          <p>Song Name</p>
+          <svg
+            data-encore-id="icon"
+            role="img"
+            aria-hidden="true"
+            viewBox="0 0 16 16"
+            class="Svg-sc-ytk21e-0 ceOVVX"
+          >
+            <path
+              d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm11.748-1.97a.75.75 0 0 0-1.06-1.06l-4.47 4.47-1.405-1.406a.75.75 0 1 0-1.061 1.06l2.466 2.467 5.53-5.53z"
+            ></path>
+          </svg>
         </div>
-        <div class="panel">
-            <div class="controls">
-                <img class="loop" id="loop" src="images/loop.svg" title="Repeat" alt="Repeat">
-                <img class="previous" id="previous" src="images/previous.svg" title="Previous" alt="Previous">
-                <img id="play" src="images/play.svg" title="Play/Pause" alt="Play/Pause">
-                <img class="next" id="next" src="images/next.svg" title="Next" alt="Next">
-                <img class="shuffle" id="shuffle" src="images/shuffle.svg" title="Shuffle" alt="Shuffle">
-            </div>
-            <div class="progress-bar">
-                <p class="current-duration">00:00</p>
-                <input type="range" class="bar" id="seek-bar" value="0" min="0" max="100">
-                <p class="duration">00:00</p>
-            </div>
+      </div>
+      <div class="panel">
+        <div class="controls">
+          <img
+            class="loop"
+            id="loop"
+            src="images/loop.svg"
+            title="Repeat"
+            alt="Repeat"
+          />
+          <img
+            class="previous"
+            id="previous"
+            src="images/previous.svg"
+            title="Previous"
+            alt="Previous"
+          />
+          <img
+            id="play"
+            src="images/play.svg"
+            title="Play/Pause"
+            alt="Play/Pause"
+          />
+          <img
+            class="next"
+            id="next"
+            src="images/next.svg"
+            title="Next"
+            alt="Next"
+          />
+          <img
+            class="shuffle"
+            id="shuffle"
+            src="images/shuffle.svg"
+            title="Shuffle"
+            alt="Shuffle"
+          />
         </div>
-        <!-- volume controls -->
-        <div class="volume">
-            <img src="images/volume.svg" alt="">
-            <input id="volume" type="range" max="100" min="0" value="100">
+        <div class="progress-bar">
+          <p class="current-duration">00:00</p>
+          <input
+            type="range"
+            class="bar"
+            id="seek-bar"
+            value="0"
+            min="0"
+            max="100"
+          />
+          <p class="duration">00:00</p>
         </div>
+
+      </div>
+      <div class="volume">
+        <img src="images/volume.svg" alt="" />
+        <input id="volume" type="range" max="100" min="0" value="100" />
+      </div>
+
     </div>
     <div id="auth-backdrop" class="hidden"></div>
 
@@ -285,26 +294,93 @@
             <button type="submit">Log In</button>
         </form>
 
-        <form id="signup-form" class="auth-form hidden">
-            <h2>Sign Up</h2>
-            <input type="text" placeholder="Username" required />
-            <input type="email" placeholder="Email" required />
-            <input type="password" placeholder="Password" required />
-            <button type="submit">Create Account</button>
-        </form>
-    </div>
-    <script src="script.js"></script>
 
     <script>
-          document.addEventListener("DOMContentLoaded", function () {
-            const loadingScreen = document.getElementById("loading-screen");
-        
-            // Set a timeout to hide the loading screen
-            setTimeout(() => {
-                loadingScreen.classList.add("hidden");
-            }, 6000); // 6000ms = 6 seconds (adjust as needed)
-        });
-    </script>
-</body>
+      // Load Home Page by default
+      window.addEventListener("DOMContentLoaded", () => {
+        const savedTheme = localStorage.getItem("theme");
+        if (savedTheme === "bright") {
+          document.body.classList.add("bright-mode");
+        }
 
+        // Load home page dynamically, then bind playlist cards
+        loadPage("home.html").then(() => {
+          bindPlaylistCards(); // ✅ Reattach playlist click events after content load
+        });
+      });
+
+      // Dynamic Page Loader
+      async function loadPage(page) {
+        const res = await fetch(page);
+        const content = await res.text();
+        document.getElementById("main-content").innerHTML = content;
+
+        // ✅ Reapply theme
+        const savedTheme = localStorage.getItem("theme");
+        if (savedTheme === "bright") {
+          document.body.classList.add("bright-mode");
+        } else {
+          document.body.classList.remove("bright-mode");
+        }
+
+        // ✅ Rebind card click listeners after DOM updates
+        setTimeout(() => {
+          if (typeof bindPlaylistCards === "function") {
+            bindPlaylistCards();
+          }
+        }, 50);
+
+        // ✅ Re-attach theme toggle event listener if present
+        const themeToggle = document.getElementById("theme-toggle");
+        if (themeToggle) {
+          updateThemeToggleText(themeToggle);
+          themeToggle.addEventListener("click", function () {
+            document.body.classList.toggle("bright-mode");
+            localStorage.setItem(
+              "theme",
+              document.body.classList.contains("bright-mode")
+                ? "bright"
+                : "dark"
+            );
+            updateThemeToggleText(this);
+          });
+        }
+      }
+
+      // Update toggle text based on current theme
+      function updateThemeToggleText(button) {
+        if (document.body.classList.contains("bright-mode")) {
+          button.textContent = "Light Mode";
+        } else {
+          button.textContent = "Dark Mode";
+        }
+      }
+
+      // Sidebar Navigation
+      const homeBtn = document.getElementById("home-logo");
+      const searchBtn = document.getElementById("searchbar");
+
+      homeBtn.addEventListener("click", () => {
+        loadPage("home.html").then(() => {
+          bindPlaylistCards(); // ✅ ensures playlist clicks work again
+        });
+        setActive(homeBtn);
+      });
+
+      searchBtn.addEventListener("click", () => {
+        loadPage("search.html");
+        setActive(searchBtn);
+      });
+
+      function setActive(activeBtn) {
+        document
+          .querySelectorAll("aside .header p")
+          .forEach((btn) => btn.classList.remove("active"));
+        activeBtn.classList.add("active");
+      }
+    </script>
+
+
+    <script src="script.js"></script>
+  </body>
 </html>
